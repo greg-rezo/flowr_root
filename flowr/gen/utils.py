@@ -48,10 +48,9 @@ from flowr.eval.evaluate_xtb import (
 from flowr.util.functional import (
     optimize_ligand_in_pocket,
 )
-from flowr.util.metrics import (
-    calculate_minimization_metrics,
-    interaction_recovery_per_complex,
-)
+# flowr.util.metrics imports posecheck / biopandas / sascorer which are
+# evaluation-only deps not needed at prediction time. Import lazily so that
+# predict_from_pdb works in headless environments without those packages.
 from flowr.util.pocket import PROLIF_INTERACTIONS
 from flowr.util.rdkit import ConformerGenerator, write_sdf_file
 
@@ -1125,6 +1124,7 @@ def evaluate_optimization(
     ligs: List[Chem.Mol],
     optim_ligs: List[Chem.Mol],
 ):
+    from flowr.util.metrics import calculate_minimization_metrics  # noqa: PLC0415
     # Calculate RMSD and strains for each pair
     strains_before_minimization = []
     strains_after_minimization = []
@@ -1158,6 +1158,7 @@ def process_interaction(
     save_dir: str,
     add_hs_and_optimize_gen_ligs: bool,
 ):
+    from flowr.util.metrics import interaction_recovery_per_complex  # noqa: PLC0415
     recovery_rate, tanimoto_sim = interaction_recovery_per_complex(
         gen_ligs=gen_lig,
         native_lig=ref_lig,
