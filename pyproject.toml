@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flowr"
+version = "0.1.0"
+description = "FlowR: Flow Matching for Molecular Docking and Conformer Generation"
+requires-python = ">=3.10"
+dependencies = [
+    "torch_geometric>=2.7.0",
+    "tensordict>=0.10.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["flowr*"]
