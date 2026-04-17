@@ -10,6 +10,8 @@ requires-python = ">=3.10"
 dependencies = [
     "torch_geometric>=2.7.0",
     "tensordict>=0.10.0",
+    "lmdb>=1.5.0",
+    "pdbinf>=0.0.4",
 ]
 
 [tool.setuptools.packages.find]
