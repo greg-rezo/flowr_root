@@ -13,6 +13,14 @@ dependencies = [
     "lmdb>=1.5.0",
     "pdbinf>=0.0.4",
     "posecheck>=1.3.1",
+    "rmsd>=1.6.4",
+    "torch_ema>=0.3",
+    "meeko>=0.7.1",
+    "biopandas>=0.5.1",
+    "biotite>=1.5.0",
+    "prolif>=2.0.3",
+    "hydride>=1.2.3",
+    "gemmi>=0.7.4",
 ]
 
 [tool.setuptools.packages.find]
