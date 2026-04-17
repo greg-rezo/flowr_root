@@ -11,7 +11,8 @@ import lightning as L
 import numpy as np
 import torch
 import yaml
-from pymol import cmd
+# pymol is imported lazily inside write_ligand_pocket_complex_pdb to avoid
+# requiring libGL.so.1 at import time in headless / server environments.
 from rdkit import Chem
 from rdkit.Chem import DataStructs, rdFingerprintGenerator
 
@@ -915,6 +916,8 @@ def write_ligand_pocket_complex_pdb(
         raise ValueError("No ligand molecules provided.")
     if not all_gen_pdbs:
         raise ValueError("No pocket PDB files provided.")
+
+    from pymol import cmd  # noqa: PLC0415 — lazy import avoids libGL at module load
 
     for i, (lig, pdb_file) in enumerate(zip(all_gen_ligs, all_gen_pdbs)):
         out_path = Path(output_path) / f"{complex_name}_{i}.pdb"
