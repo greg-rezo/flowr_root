@@ -748,6 +748,14 @@ def load_data_from_pdb(
         chain_id=chain_id,
         **processing_params,
     )
+    if system is None:
+        raise RuntimeError(
+            f"process_complex returned None for pdb_file={args.pdb_file}, "
+            f"ligand_file={args.ligand_file}, ligand_idx={ligand_idx}. "
+            f"This typically means the pocket was too small/empty, the "
+            f"ligand could not be loaded, or the protein failed to parse. "
+            f"See earlier stdout for the specific reason."
+        )
     system = system.remove_hs(include_ligand=remove_hs)
     return system
 
