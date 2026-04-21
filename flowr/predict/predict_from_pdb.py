@@ -69,7 +69,8 @@ def predict(args):
     ) = load_model(
         args,
     )
-    model = model.to("cuda")
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model = model.to(device)
     model.eval()
     print("Model complete.")
 
